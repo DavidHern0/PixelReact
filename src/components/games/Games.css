@@ -1,0 +1,13 @@
+.games-list {
+    display: flex;
+    list-style-type: none;
+    padding: 0;
+    flex-direction: column;
+    align-items: center;
+    font-size: 18px;
+}
+
+.selected {
+    /* font-weight: 600; */
+    list-style-type: disclosure-closed;
+}
