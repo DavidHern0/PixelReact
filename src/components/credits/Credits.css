@@ -1,0 +1,65 @@
+.credits-container {
+    margin: 0;
+    overflow: hidden;
+    background-color: #000;
+    color: #fff;
+    font-family: 'Arial', sans-serif;
+    height: 100%;
+}
+
+.crawl {
+    white-space: pre-wrap;
+    overflow: hidden;
+    font-size: 16px;
+    line-height: 1.5;
+    animation: crawlAnimation 60s linear forwards;
+}
+
+@keyframes introAnimation {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes crawlAnimation {
+    0% {
+        transform: translateY(250%);
+    }
+
+    100% {
+        transform: translateY(-500%);
+    }
+}
+
+a {
+    color: #fff;
+}
+
+h1,
+h2,
+h3,
+a,
+p {
+    letter-spacing: 0.2em;
+    word-spacing: 0.2em;
+}
+
+.hidden-until {
+    animation: hiddenAppears 60s;
+}
+
+@keyframes hiddenAppears {
+
+    0%,
+    50% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
