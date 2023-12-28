@@ -1,6 +1,11 @@
+import React, { useState } from 'react';
 import Games from './components/games/Games';
+import Credits from './components/games/credits/Credits';
 
 function App() {
+  const [selectedGame, setSelectedGame] = useState();
+  const [componentHistory, setComponentHistory] = useState([]);
+  const [currentComponent, setCurrentComponent] = useState(<Games selectedGame={selectedGame} setSelectedGame={setSelectedGame} />);
 
   const simulateKeyEvent = (key) => {
     const event = new KeyboardEvent('keydown', {
@@ -17,11 +22,30 @@ function App() {
     simulateKeyEvent(`Arrow${direction}`);
   };
 
+  const handleAButtonClick = () => {
+    if (currentComponent.type === Games) {
+      if (selectedGame) {
+        setComponentHistory([...componentHistory, currentComponent]);
+        if (selectedGame === 'CREDITS') {
+          setCurrentComponent(<Credits />);
+        }
+      }
+    }
+  };
+
+  const handleBButtonClick = () => {
+    if (currentComponent.type != Games) {
+      const previousComponent = componentHistory.pop();
+      setComponentHistory([...componentHistory]);
+      setCurrentComponent(previousComponent);
+    }
+  };
+
   return (
     <>
       <div className='arcade-machine'>
         <div className='screen'>
-          <Games />
+          {currentComponent.type === Games ? <Games selectedGame={selectedGame} setSelectedGame={setSelectedGame} /> : currentComponent}
         </div>
 
         <div className='arcade-buttons'>
@@ -34,10 +58,10 @@ function App() {
           </div>
           <div className='buttons'>
             <div className='button-left'>
-              <button className='button-arcade'>A</button>
+              <button className='button-arcade' onClick={handleAButtonClick}>A</button>
             </div>
             <div className='button-right'>
-              <button className='button-arcade'>B</button>
+              <button className='button-arcade' onClick={handleBButtonClick}>B</button>
             </div>
           </div>
         </div>

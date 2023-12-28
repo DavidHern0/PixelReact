@@ -1,9 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import './Games.css';
 
-const Games = () => {
-  const gamesList = ["a", "b", "c"];
-  const [selectedGame, setSelectedGame] = useState(gamesList[0]);
+const Games = ({ selectedGame, setSelectedGame }) => {
+  const gamesList = ["a", "b", "c", "CREDITS"];
+
+  useEffect(() => {
+    setSelectedGame(gamesList[0]);
+  }, [setSelectedGame]);
 
   const handleGameClick = (game) => {
     setSelectedGame(game);
