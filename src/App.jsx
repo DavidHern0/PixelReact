@@ -1,11 +1,12 @@
-import React, { useState } from 'react';
-import Games from './components/games/Games';
-import Credits from './components/games/credits/Credits';
+import React, { useState, useEffect } from 'react';
+import Menu from './components/menu/Menu';
+import Credits from './components/credits/Credits';
+import StartScreen from './components/StartScreen/StartScreen';
 
 function App() {
   const [selectedGame, setSelectedGame] = useState();
   const [componentHistory, setComponentHistory] = useState([]);
-  const [currentComponent, setCurrentComponent] = useState(<Games selectedGame={selectedGame} setSelectedGame={setSelectedGame} />);
+  const [currentComponent, setCurrentComponent] = useState(<StartScreen />);
 
   const simulateKeyEvent = (key) => {
     const event = new KeyboardEvent('keydown', {
@@ -18,12 +19,33 @@ function App() {
     document.dispatchEvent(event);
   };
 
+  function handleAction(event) {
+    if (currentComponent.type === StartScreen) {
+      setCurrentComponent(<Menu selectedGame={selectedGame} setSelectedGame={setSelectedGame} />);
+    }
+  } 
+  useEffect(() => {
+    const handleClick = (event) => {
+      handleAction(event);
+    };
+  
+    document.addEventListener('click', handleClick);
+    document.addEventListener('keydown', handleAction);
+  
+    return () => {
+      document.removeEventListener('click', handleClick);
+      document.removeEventListener('keydown', handleAction);
+    };
+  }, [handleAction]);
+  
+
+
   const handleButtonClick = (direction) => {
     simulateKeyEvent(`Arrow${direction}`);
   };
 
   const handleAButtonClick = () => {
-    if (currentComponent.type === Games) {
+    if (currentComponent.type === Menu) {
       if (selectedGame) {
         setComponentHistory([...componentHistory, currentComponent]);
         if (selectedGame === 'CREDITS') {
@@ -34,7 +56,7 @@ function App() {
   };
 
   const handleBButtonClick = () => {
-    if (currentComponent.type != Games) {
+    if (currentComponent.type != Menu && currentComponent.type != StartScreen) {
       const previousComponent = componentHistory.pop();
       setComponentHistory([...componentHistory]);
       setCurrentComponent(previousComponent);
@@ -45,7 +67,7 @@ function App() {
     <>
       <div className='arcade-machine'>
         <div className='screen'>
-          {currentComponent.type === Games ? <Games selectedGame={selectedGame} setSelectedGame={setSelectedGame} /> : currentComponent}
+          {currentComponent.type === Menu ? <Menu selectedGame={selectedGame} setSelectedGame={setSelectedGame} /> : currentComponent}
         </div>
 
         <div className='arcade-buttons'>

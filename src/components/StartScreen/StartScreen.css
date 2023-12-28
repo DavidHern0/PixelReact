@@ -1,0 +1,26 @@
+.centered-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+@keyframes blink {
+    0% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0;
+    }
+}
+
+.blinking-text {
+    animation: blink 2s infinite;
+    /* Puedes ajustar la duración según tus necesidades */
+}
+
+h2 {
+    letter-spacing: 0.2em;
+    word-spacing: 0.2em;
+}

@@ -11,6 +11,10 @@ h1 {
   font-weight: 400;
 }
 
+h1, h2, li, ul {  
+  cursor: default;
+}
+
 #root {
   display: flex;
   justify-content: center;

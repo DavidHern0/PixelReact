@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
-import './Games.css';
+import './Menu.css';
 
-const Games = ({ selectedGame, setSelectedGame }) => {
+const Menu = ({ selectedGame, setSelectedGame }) => {
   const gamesList = ["a", "b", "c", "CREDITS"];
 
   useEffect(() => {
@@ -45,4 +45,4 @@ const Games = ({ selectedGame, setSelectedGame }) => {
   );
 };
 
-export default Games;
+export default Menu;
