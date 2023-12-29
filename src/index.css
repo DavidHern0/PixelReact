@@ -1,7 +1,9 @@
 @import url('https://fonts.cdnfonts.com/css/arcade-classic');
+
 * {
   font-family: 'ArcadeClassic', sans-serif;
 }
+
 body {
   margin: 0;
   font-family: 'ArcadeClassic', sans-serif;
@@ -13,7 +15,10 @@ h1 {
   font-weight: 400;
 }
 
-h1, h2, li, ul {  
+h1,
+h2,
+li,
+ul {
   cursor: default;
 }
 
