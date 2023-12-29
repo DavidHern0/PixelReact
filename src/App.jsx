@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Menu from './components/menu/Menu';
 import Credits from './components/credits/Credits';
+import Controls from './components/controls/Controls'
 import StartScreen from './components/startScreen/StartScreen';
 
 function App() {
@@ -32,6 +33,9 @@ function App() {
         setComponentHistory([...componentHistory, currentComponent]);
         if (selectedGame === 'CREDITS') {
           setCurrentComponent(<Credits />);
+        }
+        if (selectedGame === 'CONTROLS') {
+          setCurrentComponent(<Controls />);
         }
       }
     }
