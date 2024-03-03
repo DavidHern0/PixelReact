@@ -1,9 +1,10 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import ClickSound from '../../assets/ClickSound.mp3';
-import { gamesList } from '../../utilities/variables';
+import { gamesList, translate } from '../../utilities/variables';
 import './Menu.css';
 
-const Menu = ({ selectedGame, setSelectedGame }) => {
+const Menu = ({ selectedGame, setSelectedGame, selectedLanguage }) => {
+
   const clickSound = new Audio(ClickSound);
   clickSound.volume = 0.1;
 
@@ -40,11 +41,11 @@ const Menu = ({ selectedGame, setSelectedGame }) => {
   
   return (
     <>
-      <h2>SELECT OPTION</h2>
+      <h2>{translate[selectedLanguage]["SELECT OPTION"]}</h2>
       <ul className="games-list">
         {gamesList.map((game) => (
           <li key={game} onClick={() => handleGameClick(game)} className={selectedGame === game ? 'selected' : ''}>
-            {game}
+            {translate[selectedLanguage][game]}
           </li>
         ))}
       </ul>

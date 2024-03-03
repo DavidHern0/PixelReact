@@ -3,8 +3,11 @@ import Menu from './components/menu/Menu';
 import Credits from './components/credits/Credits';
 import Controls from './components/controls/Controls'
 import StartScreen from './components/startScreen/StartScreen';
+import Language from './components/language/Language';
 
 function App() {
+  // const [selectedLanguage, setSelectedLanguage] = useState("ESP");
+  let selectedLanguage = "ESP";
   const [selectedGame, setSelectedGame] = useState();
   const [componentHistory, setComponentHistory] = useState([]); //go back component
   const [currentComponent, setCurrentComponent] = useState(<StartScreen />); //set component
@@ -24,7 +27,6 @@ function App() {
   const handleButtonClick = (direction) => {
     simulateArrowsKeyEvent(`Arrow${direction}`);
   };
-  //
 
   //Handle 'A' button
   const handleAButtonClick = () => {
@@ -32,7 +34,10 @@ function App() {
       if (selectedGame) {
         setComponentHistory([...componentHistory, currentComponent]);
         if (selectedGame === 'CREDITS') {
-          setCurrentComponent(<Credits />);
+          setCurrentComponent(<Credits/>);
+        }
+        if (selectedGame === 'LANGUAGE') {
+          setCurrentComponent(<Language currentLanguage={selectedLanguage} />);
         }
         if (selectedGame === 'CONTROLS') {
           setCurrentComponent(<Controls />);
@@ -59,7 +64,7 @@ function App() {
         handleBButtonClick();
       } else if (event.type === 'keydown') {
         if (currentComponent.type === StartScreen) {
-          setCurrentComponent(<Menu selectedGame={selectedGame} setSelectedGame={setSelectedGame} />);
+          setCurrentComponent(<Menu selectedGame={selectedGame} setSelectedGame={setSelectedGame} selectedLanguage={selectedLanguage}/>);
         }
       }
     };
@@ -77,7 +82,7 @@ function App() {
     <>
       <div className='arcade-machine'>
         <div className='screen'>
-          {currentComponent.type === Menu ? <Menu selectedGame={selectedGame} setSelectedGame={setSelectedGame} /> : currentComponent}
+          {currentComponent.type === Menu ? <Menu selectedGame={selectedGame} setSelectedGame={setSelectedGame} selectedLanguage={selectedLanguage}/> : currentComponent}
         </div>
 
         <div className='arcade-buttons'>
