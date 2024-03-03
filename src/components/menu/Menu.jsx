@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
 import ClickSound from '../../assets/ClickSound.mp3';
+import { gamesList } from '../../utilities/variables';
 import './Menu.css';
 
 const Menu = ({ selectedGame, setSelectedGame }) => {
-  const gamesList = ["CONTROLS", "CREDITS"];
   const clickSound = new Audio(ClickSound);
   clickSound.volume = 0.1;
 
@@ -37,7 +37,6 @@ const Menu = ({ selectedGame, setSelectedGame }) => {
       document.removeEventListener('keydown', handleKeyPress);
     };
   }, [selectedGame]);
-  //
   
   return (
     <>
